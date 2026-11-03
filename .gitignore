@@ -1,0 +1,34 @@
+# Raw sequencing data
+raw_data/
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+
+# Alignment files
+*.sam
+*.bam
+*.bai
+
+# Reference genome and indexes
+reference/
+hisat2_index/
+
+# Temporary files
+tmp/
+*.tmp
+
+# Quality control outputs
+fastqc/
+
+# Count and analysis outputs
+counts/
+results/
+
+# Logs
+logs/
+
+# R temporary files
+.Rhistory
+.RData
+.Rproj.user/
