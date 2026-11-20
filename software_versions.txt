@@ -1,0 +1,9 @@
+# 2026-11-20 fastqc (fastqc-0.12.1.sif)
+FastQC v0.12.1
+# 2026-11-20 multiqc (multiqc-1.33.sif)
+multiqc, version 1.33
+# 2026-11-20 hisat2 + samtools (hisat2_samtools_408dfd02f175cd88.sif)
+/opt/conda/bin/hisat2-align-s version 2.2.1
+samtools 1.20
+# 2026-11-20 featureCounts (subread_2.0.6.sif)
+featureCounts v2.0.6
