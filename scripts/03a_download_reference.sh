@@ -22,38 +22,36 @@ mkdir -p "${REFDIR}"
 cd "${REFDIR}"
 
 # Define the download locations
-FA_URL=https://ftp.ensembl.org/pub/current_fasta/mus_musculus/dna
-GTF_URL=https://ftp.ensembl.org/pub/current_gtf/mus_musculus
+RELEASE=116
+FA_URL=https://ftp.ensembl.org/pub/release-${RELEASE}/fasta/mus_musculus/dna
+GTF_URL=https://ftp.ensembl.org/pub/release-${RELEASE}/gtf/mus_musculus
+FA=Mus_musculus.GRCm39.dna.primary_assembly.fa.gz
+GTF=Mus_musculus.GRCm39.${RELEASE}.gtf.gz
 
 # Download the reference genome and its checksums
-wget ${FA_URL}/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz
+wget ${FA_URL}/${FA}
 wget ${FA_URL}/CHECKSUMS -O CHECKSUMS_fasta
 
 # Download the gene annotation and its checksums
-wget -r -np -nd -A "Mus_musculus.GRCm39.*.gtf.gz" ${GTF_URL}/
+wget ${GTF_URL}/${GTF}
 wget ${GTF_URL}/CHECKSUMS -O CHECKSUMS_gtf
 
-# Remove unnecessary annotation files
-rm -f *abinitio* *chr_patch* *chr.gtf.gz
-
-# Define the file names
-FA=Mus_musculus.GRCm39.dna.primary_assembly.fa.gz
-GTF=$(ls Mus_musculus.GRCm39.*.gtf.gz)
-
-# Check the downloaded files
-echo "--- Computed ---"
-sum "${FA}"
-sum "${GTF}"
-echo "--- Expected ---"
-grep "primary_assembly.fa.gz" CHECKSUMS_fasta
-grep "${GTF}" CHECKSUMS_gtf
+# Check the downloaded files against the Ensembl checksums
+check_sum () {
+  local file=$1 sumfile=$2
+  local computed expected
+  computed=$(sum "${file}" | awk '{print $1, $2}')
+  expected=$(grep "${file}" "${sumfile}" | awk '{print $1, $2}')
+  echo "${file}: computed=${computed} expected=${expected}"
+  [ "${computed}" = "${expected}" ] || { echo "Checksum mismatch for ${file}"; exit 1; }
+}
 
 # Unzip the reference genome (keep the .gz)
 gunzip -k "${FA}"
 
 # Record the reference in the versions file
 {
-  echo "# $(date +%F) reference (Ensembl, ftp.ensembl.org/pub/current_*)"
+  echo "# $(date +%F) reference (Ensembl release ${RELEASE})"
   echo "${FA}"
   echo "${GTF}"
 } >> "${VERSIONS}"
