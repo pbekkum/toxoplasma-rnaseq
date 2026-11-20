@@ -17,10 +17,10 @@ set -euo pipefail
 WORKDIR=/data/users/${USER}/toxoplasma_rnaseq
 INDEX=${WORKDIR}/results/03_mapping/hisat2_index
 BAMDIR=${WORKDIR}/results/03_mapping/bam
-LOGDIR=${WORKDIR}/logs/mapping
+SUMMARYDIR=${WORKDIR}/results/03_mapping/hisat2_summaries
 
 # Create output folders
-mkdir -p "${BAMDIR}"
+mkdir -p "${BAMDIR}" "${SUMMARYDIR}"
 cd "${WORKDIR}"
 
 # Specify the container
@@ -37,6 +37,6 @@ apptainer exec --bind /data ${CONTAINER} bash -c "
     -1 raw_data/${SAMPLE}_1.fastq.gz \
     -2 raw_data/${SAMPLE}_2.fastq.gz \
     --rna-strandness RF \
-    2> ${LOGDIR}/${SAMPLE}.hisat2_summary.txt \
+    2> ${SUMMARYDIR}/${SAMPLE}.hisat2_summary.txt \
   | samtools view -b -o ${BAMDIR}/${SAMPLE}.bam -
 "
