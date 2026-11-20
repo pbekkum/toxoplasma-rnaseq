@@ -1,34 +1,20 @@
-# Raw sequencing data
-raw_data/
-*.fastq
-*.fastq.gz
-*.fq
-*.fq.gz
+# Course data and generated output
+raw_data
+results/
+logs/
 
-# Alignment files
+# Large data/alignment files, in case they end up outside results/
+*.fastq.gz
 *.sam
 *.bam
 *.bai
+*.sif
 
-# Reference genome and indexes
-reference/
-hisat2_index/
+# Editor backups
+*.save
+*~
 
-# Temporary files
-tmp/
-*.tmp
-
-# Quality control outputs
-fastqc/
-
-# Count and analysis outputs
-counts/
-results/
-
-# Logs
-logs/
-
-# R temporary files
+# R
 .Rhistory
 .RData
 .Rproj.user/
