@@ -14,8 +14,8 @@ set -euo pipefail
 
 # Set the variables
 WORKDIR=/data/users/${USER}/toxoplasma_rnaseq
-INDIR=${WORKDIR}/results/02_quality_checks
-OUTDIR=${INDIR}/multiqc
+INDIR=${WORKDIR}/results/02_quality_checks/fastqc
+OUTDIR=${WORKDIR}/results/02_quality_checks/multiqc
 CONTAINER=/containers/apptainer/multiqc-1.33.sif
 VERSIONS=${WORKDIR}/software_versions.txt
 
