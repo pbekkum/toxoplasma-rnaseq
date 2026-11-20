@@ -20,6 +20,7 @@ mkdir -p results/04_gene_counting
 mkdir -p scripts
 mkdir -p logs/fastqc
 mkdir -p logs/multiqc
+mkdir -p logs/reference
 mkdir -p logs/mapping
 mkdir -p logs/featurecounts
 
