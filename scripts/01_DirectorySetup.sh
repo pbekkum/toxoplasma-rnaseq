@@ -13,10 +13,9 @@ mkdir -p "$WORKDIR"
 cd "$WORKDIR"
 
 # Create output folders, one per analysis step
-mkdir -p 01_getting_started
-mkdir -p 02_quality_checks
-mkdir -p 03_mapping
-mkdir -p 04_gene_counting
+mkdir -p results/02_quality_checks
+mkdir -p results/03_mapping
+mkdir -p results/04_gene_counting
 
 mkdir -p scripts
 mkdir -p logs/fastqc
